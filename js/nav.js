@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load page content
     let page = window.location.hash.substr(1);
-    if (page == "") page = "home";
+    if (page == "") page = "standing";
     loadPage(page);
 
     function loadPage(page) {
@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 let content = document.querySelector("#body-content");
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
+                    // load function
+                    getAllStandings()
+                    getAllTeams()
+                    getAllMatch()
                     // Initialization mateteriallize
                     const slider = document.querySelectorAll('.slider');
                     M.Slider.init(slider, {
