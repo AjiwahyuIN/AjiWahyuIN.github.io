@@ -53,11 +53,11 @@ function showMatch(data) {
         const jsonToStr = JSON.stringify(match);
         matches += `
                     <tr>
-                            <td><img src="" alt="mu">
+                            <td><img src="" >
                                 <br><strong>${match.homeTeam.name}</strong>
                             </td>
                             <td><strong>${match.score.fullTime.homeTeam}</strong> - <strong>${match.score.fullTime.awayTeam}</strong></td>
-                            <td><img src="" alt="mu">
+                            <td><img src="">
                                 <br><strong>${match.awayTeam.name}</strong></td>
                             <td>
                                 <ul class="">
