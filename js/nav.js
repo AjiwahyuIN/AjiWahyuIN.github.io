@@ -46,9 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
                     // load function
-                    getAllStandings()
-                    getAllTeams()
-                    getAllMatch()
+                    if (page === "standing") {
+                        getAllStandings();
+                    } else if (page === "clubs") {
+                        getAllTeams();
+                    } else if (page === "match") {
+                        getAllMatch();
+                    } else if (page === "saved") {
+                        getFavoriteTeam();
+                    }
                     // Initialization mateteriallize
                     const slider = document.querySelectorAll('.slider');
                     M.Slider.init(slider, {

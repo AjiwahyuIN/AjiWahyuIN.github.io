@@ -3,10 +3,10 @@
 
 // const LEAGUE_ID = 2021;
 let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-let url = `https://api.football-data.org/v2/matches/`;
+let url = `https://api.football-data.org/v2/competitions/2021/matches`;
 
 const fetchAPIMatch = url => {
-    return fetch(proxyUrl + url, {
+    return fetch(url, {
             headers: {
                 'X-Auth-Token': API_KEY,
                 // 'Access-Control-Allow-Origin': 'https://api.football-data.org'
@@ -49,15 +49,16 @@ function showMatch(data) {
     let matches = "";
     let matchElement = document.getElementById("cardMatch");
 
-    data.matches[0].table.forEach(function (match) {
+    data.matches.slice(0, 20).map(function (match) {
+        const jsonToStr = JSON.stringify(match);
         matches += `
                     <tr>
-                            <td><img src="${match.competition.area.ensignUrl.replace(/^http:\/\//i, 'https://')}" alt="mu">
-                                <br><span>${match.homeTeam.name}</span>
+                            <td><img src="" alt="mu">
+                                <br><strong>${match.homeTeam.name}</strong>
                             </td>
-                            <td>${match.score.fullTime.homeAway} - ${match.score.fullTime.awayTeam}</td>
-                            <td><img src="/img/mu.png" alt="mu">
-                                <br><span>${match.awayTeam.name}</span></td>
+                            <td><strong>${match.score.fullTime.homeTeam}</strong> - <strong>${match.score.fullTime.awayTeam}</strong></td>
+                            <td><img src="" alt="mu">
+                                <br><strong>${match.awayTeam.name}</strong></td>
                             <td>
                                 <ul class="">
                                     <li>
@@ -68,11 +69,11 @@ function showMatch(data) {
                                     <li>
                                         <div class="collapsible-header">
                                             <i class="material-icons">place</i>
-                                            Old Traffold
+                                            ${match.homeTeam.name} Stadium
                                         </div>
                                     </li>
                                 </ul>
-                                <a onclick="M.toast({html: 'Saved'})" class="btn centered center-align"
+                                <a onclick="favorite(${jsonToStr})" class="btn centered center-align"
                                     style="background-color: #37003C;">Save This Match</a>
                             </td>
                      </tr>
@@ -98,4 +99,48 @@ function showMatch(data) {
                 </table>
             </div>
     `;
+}
+
+function getDataTeam() {
+    if ("caches" in window) {
+        caches.match(ENDPOINT_TEAMS).then(function (response) {
+            if (response) {
+                response.json().then(function (data) {
+                    console.log("Teams Data :" + data);
+                    showTeams(data);
+                })
+            }
+        })
+    }
+
+    fetchAPITeams(ENDPOINT_TEAMS)
+        .then(data => {
+            showTeams(data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+
+function getDataTeamById(id) {
+    let urlid = 'https://api.football-data.org/v2/teams/' + id;
+    return fetch(urlid, {
+            headers: {
+                'X-Auth-Token': API_KEY,
+                // 'Access-Control-Allow-Origin': 'https://api.football-data.org'
+            }
+        })
+        .then(res => {
+            if (res.status !== 200) {
+                console.log("Error : " + res.status);
+                return Promise.reject(new Error(res.statusText))
+            } else {
+                return Promise.resolve(res)
+            }
+        })
+        .then(res => res.json())
+        .catch(err => {
+            console.log(err);
+        })
+
 }

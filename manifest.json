@@ -2,6 +2,7 @@
     "name": "EPL From Home",
     "short_name": "EPLFromHome",
     "description": "EPLFromHome for submission 1 MPWA",
+    "gcm_sender_id": "585307285771",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#e53935",
