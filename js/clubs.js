@@ -1,6 +1,3 @@
-// const API_KEY = "64d0222a56424adf974f9e6cc32f7e54";
-// const BASE_URL = " https://api.football-data.org/v2/";
-
 const ENDPOINT_TEAMS = `https://api.football-data.org/v2/teams`;
 
 const fetchAPITeams = url => {
@@ -28,7 +25,7 @@ function getAllTeams() {
         caches.match(ENDPOINT_TEAMS).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    console.log("Teams Data :" + data);
+                    // console.log("Teams Data :" + data);
                     showTeams(data);
                 })
             }
@@ -41,22 +38,29 @@ function getAllTeams() {
         })
         .catch(error => {
             console.log(error);
+
         })
 }
 
 function showTeams(data) {
     let teams = "";
     let teamsElement = document.getElementById("cardTeams");
-    // console.log(data);
-    data.teams.slice(0, 48).map(function (team) {
-        // console.log(teams.name);
+
+    data.teams.slice(0, 18).map(function (team) {
         const jsonToStr = JSON.stringify(team);
+
+        var dataGambar = '';
+        if (team.crestUrl == null && 404) {
+            dataGambar = './img/no-image.png'
+        } else {
+            dataGambar = team.crestUrl.replace(/^http:\/\//i, 'https://')
+        }
         teams += `
         
         <div class="col s6 m4 l3">
         <div class="card large hoverable">
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="${team.crestUrl}">
+                <img class="activator" src="${dataGambar}" alt="image-clubs">
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">${team.name}<i
@@ -104,24 +108,31 @@ function getFavoriteTeam() {
 
         if (teams.length === 0) {
             teamsHTML = `
-            <img src="/img/no-data.svg" style="width:50%; margin-left:auto;margin-right:auto;display:block" class="image-responsive alt="">
-            <h5 style="text-align:center">You Have no Favorite Team</h5>
+            <img src="/img/no-data.svg" style="width:50%; margin-left:auto;margin-right:auto;display:block" class="image-responsive" alt="no-data-image">
+            <h5 style="text-align:center">Ups...You haven't added your favorite team yet</h5>
             `
         } else {
 
             console.log(teams);
             teams.forEach(team => {
+                var dataGambarSaved = '';
+                if (team.crestUrl == null && 404) {
+                    dataGambarSaved = './img/no-image.png'
+                } else {
+                    dataGambarSaved = team.crestUrl.replace(/^http:\/\//i, 'https://')
+                }
                 teamsHTML += `
                 <div class="col s6 m4 l3">
         <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="${team.crestUrl}">
+                <img class="activator" src="${dataGambarSaved}">
             </div>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">${team.name}<i
                         class="material-icons right">more_vert</i></span>
                 <!-- <p><a href="#">This is a link</a></p> -->
-                <a class="btn-floating btn-large waves-effect waves-light orange lighten-2" id="saved" onclick='deleteFavorite(${team.ID})'><i class="material-icons">delete</i></a>
+                <a onclick='deleteFavorite(${team.ID})' id="saved" class='btn centered center-align'
+                                    style='background-color: #37003C;'>Delete</a>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">${team.name}<i

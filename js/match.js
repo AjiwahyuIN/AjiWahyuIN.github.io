@@ -1,7 +1,3 @@
-// const API_KEY = "64d0222a56424adf974f9e6cc32f7e54";
-// const BASE_URL = "https://api.football-data.org/v2/";
-
-// const LEAGUE_ID = 2021;
 let proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 let url = `https://api.football-data.org/v2/competitions/2021/matches`;
 
@@ -50,7 +46,6 @@ function showMatch(data) {
     let matchElement = document.getElementById("cardMatch");
 
     data.matches.slice(0, 20).map(function (match) {
-        const jsonToStr = JSON.stringify(match);
         matches += `
                     <tr>
                             <td><img src="" >
@@ -73,8 +68,6 @@ function showMatch(data) {
                                         </div>
                                     </li>
                                 </ul>
-                                <a onclick="favorite(${jsonToStr})" class="btn centered center-align"
-                                    style="background-color: #37003C;">Save This Match</a>
                             </td>
                      </tr>
         `;

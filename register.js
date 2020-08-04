@@ -1,18 +1,4 @@
 // REGISTER SERVICE WORKER
-// if ("serviceWorker" in navigator) {
-//     window.addEventListener("load", function () {
-//         navigator.serviceWorker
-//             .register("/service-worker.js")
-//             .then(function () {
-//                 console.log("Pendaftaran ServiceWorker berhasil");
-//             })
-//             .catch(function () {
-//                 console.log("Pendaftaran ServiceWorker gagal");
-//             });
-//     });
-// } else {
-//     console.log("ServiceWorker belum didukung browser ini.");
-// }
 if (!('serviceWorker' in navigator)) {
     console.log("Service worker tidak didukung browser ini.");
 } else {
@@ -46,7 +32,7 @@ function requestPermission() {
                 navigator.serviceWorker.getRegistration().then(function (registration) {
                     registration.pushManager.subscribe({
                         userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array("BLtYVw0pkyO5cFGJiPdH7IKGYLUQO0VOvaft3lkWwIChuSBIJJTOl1FWk76qqlGSxVX7TFTqcHl-AAlz_oUWBmo")
+                        applicationServerKey: urlBase64ToUint8Array("BJC9-DBQ0kwVSAiYkOBTF9WTWlVQIpOgCdxXrMVzAMv2QcGtsK-npCf0FY26fiUjf_PBtnm7RmyXLjXpLwlU8P0")
                     }).then(function (subscribe) {
                         console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
                         console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(

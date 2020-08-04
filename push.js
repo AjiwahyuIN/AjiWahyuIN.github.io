@@ -1,8 +1,8 @@
 var webPush = require('web-push');
 
 const vapidKeys = {
-    "publicKey": "BLtYVw0pkyO5cFGJiPdH7IKGYLUQO0VOvaft3lkWwIChuSBIJJTOl1FWk76qqlGSxVX7TFTqcHl-AAlz_oUWBmo",
-    "privateKey": "SO-q2VShaNGNPDg4BzfV7op_wfwP2Qq2XJ0O2a5tUFM"
+    "publicKey": "BJC9-DBQ0kwVSAiYkOBTF9WTWlVQIpOgCdxXrMVzAMv2QcGtsK-npCf0FY26fiUjf_PBtnm7RmyXLjXpLwlU8P0",
+    "privateKey": "kwlpipC_7KrSzgzPMFmV1w5uzbB6HJXaNySLxKqOAeQ"
 };
 
 
@@ -12,13 +12,13 @@ webPush.setVapidDetails(
     vapidKeys.privateKey
 )
 var pushSubscription = {
-    "endpoint": "https://fcm.googleapis.com/fcm/send/eQpKThI5HVw:APA91bHfScRSVba7Oajs8obFUOuCUPgiSlCGTZr0nfW7ESvCdDe-X5mBm3Bh92QQ5GyR-aIs13KLwlhtWG8sHQK96hK_8zZxGQ1L5TTwWCGlRmDnKAJ8R5OZKjQr6m-114RrwArO3yLL",
+    "endpoint": "https://fcm.googleapis.com/fcm/send/fcXcMZz3Ufs:APA91bF4jMM2KB1JhjbvmRsCSsYC3lShH1sGmwomb9YQYrkJuuv6hikVV1NCT15cjP0hh448OX1ficluyNBKfia8Ed53VMr4hXUu-GZS7Fcq7vjmqmICXJIVHnIl_BQQC93mDcWQS7ha",
     "keys": {
-        "p256dh": "BCI74ELIrdP4WXqxH/3oGlbnMuYqdL0D63rdMJ/K5GE7NFpLJLc1ebXVVi3EmGtjS9YIORrmGyeqfH6gms7IYbM=",
-        "auth": "PpT9FDnfYCc9WRAGn95k5g=="
+        "p256dh": "BJkNgSIDST+IwUKWVrxcdUoUdP2S2S6Fyiepxt0OqXMh6RPJkguZbGQtqwHcrwtcEPOaMdKf5U4SBD8EgnkfeP8=",
+        "auth": "L3mWX4+z+qSixEdXt+K/tg=="
     }
 };
-var payload = 'Selamat! Aplikasi Anda sudah dapat menerima push notifikasi!';
+var payload = 'Selamat Datang di FootballFromHome';
 
 var options = {
     gcmAPIKey: '585307285771',
